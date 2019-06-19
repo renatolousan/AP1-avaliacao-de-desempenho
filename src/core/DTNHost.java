@@ -35,6 +35,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	private List<MovementListener> movListeners;
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
+	public Boolean isEgoistaBoolean;
 
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -54,12 +55,13 @@ public class DTNHost implements Comparable<DTNHost> {
 			List<MovementListener> movLs,
 			String groupId, List<NetworkInterface> interf,
 			ModuleCommunicationBus comBus,
-			MovementModel mmProto, MessageRouter mRouterProto) {
+			MovementModel mmProto, MessageRouter mRouterProto, Boolean isEgoista) {
 		this.comBus = comBus;
 		this.location = new Coord(0,0);
 		this.address = getNextAddress();
 		this.name = groupId+address;
 		this.net = new ArrayList<NetworkInterface>();
+		this.isEgoistaBoolean = isEgoista;
 
 		for (NetworkInterface i : interf) {
 			NetworkInterface ni = i.replicate();

@@ -83,6 +83,8 @@ public abstract class MessageRouter {
 	public static final int DENIED_UNSPECIFIED = -99;
 	/** Maximum Ttl value */
 	public static final int MAX_TTL_VALUE = 35791394;
+	/** Receive return value for node is egoist */
+	public static final int DENIED_EGOIST = -100;
 
 	private List<MessageListener> mListeners;
 	/** The messages being transferred with msgID_hostName keys */

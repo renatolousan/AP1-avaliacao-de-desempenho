@@ -70,6 +70,7 @@ public class SimScenario implements Serializable {
 	public static final String INTERFACENAME_S = "interface";
 	/** application name in the group -setting id ({@value})*/
 	public static final String GAPPNAME_S = "application";
+	public static final String EGO_PERCENTAGE = "porcentagem";
 
 	/** package where to look for movement models */
 	private static final String MM_PACKAGE = "movement.";
@@ -329,6 +330,7 @@ public class SimScenario implements Serializable {
 			String gid = s.getSetting(GROUP_ID_S);
 			int nrofHosts = s.getInt(NROF_HOSTS_S);
 			int nrofInterfaces = s.getInt(NROF_INTERF_S);
+			double nrofIndEgos = s.getDouble(EGO_PERCENTAGE);
 			int appCount;
 
 			// creates prototypes of MessageRouter and MovementModel
@@ -392,13 +394,21 @@ public class SimScenario implements Serializable {
 			// creates hosts of ith group
 			for (int j=0; j<nrofHosts; j++) {
 				ModuleCommunicationBus comBus = new ModuleCommunicationBus();
+				double qtdEgoistas = Math.floor(nrofIndEgos * (double) nrofHosts);
+				System.out.println(qtdEgoistas);
 
-				// prototypes are given to new DTNHost which replicates
-				// new instances of movement model and message router
-				DTNHost host = new DTNHost(this.messageListeners,
+				if(j <= qtdEgoistas){
+					DTNHost host = new DTNHost(this.messageListeners,
 						this.movementListeners,	gid, interfaces, comBus,
-						mmProto, mRouterProto);
+						mmProto, mRouterProto, true);
 				hosts.add(host);
+				} else {
+					DTNHost host = new DTNHost(this.messageListeners,
+						this.movementListeners,	gid, interfaces, comBus,
+						mmProto, mRouterProto, false);
+				hosts.add(host);
+				}
+				
 			}
 		}
 	}

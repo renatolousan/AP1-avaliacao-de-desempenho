@@ -62,14 +62,17 @@ Group.interface1 = btInterface
 Group.speed = 0.5, 1.5
 # Message TTL of 300 minutes (5 hours)
 Group.msgTtl = 300
+# valor 0.0 ate 1
+Group.porcentagem = 0.5
 
-Group.nrofHosts = 40
+Group.nrofHosts = 10
 
 # group1 (pedestrians) specific settings
 Group1.groupID = p
 
 # group2 specific settings
 Group2.groupID = c
+Group2.nrofEvents = 0
 # cars can drive only on roads
 Group2.okMaps = 1
 # 10-50 km/h
@@ -121,7 +124,7 @@ Events1.interval = 25,35
 # Message sizes (500kB - 1MB)
 Events1.size = 500k,1M
 # range of message source/destination addresses
-Events1.hosts = 0,126
+Events1.hosts = 0,9
 # Message ID prefix
 Events1.prefix = M
 

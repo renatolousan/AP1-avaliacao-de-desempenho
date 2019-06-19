@@ -254,6 +254,9 @@ public abstract class ActiveRouter extends MessageRouter {
 		if (!makeRoomForMessage(m.getSize())) {
 			return DENIED_NO_SPACE; // couldn't fit into buffer -> reject
 		}
+		if (getHost().isEgoistaBoolean == true) {
+			return DENIED_EGOIST;
+		}
 
 		return RCV_OK;
 	}
